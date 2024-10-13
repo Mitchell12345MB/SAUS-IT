@@ -1,41 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM Content Loaded');
     const heroButtons = document.querySelectorAll('.hero-button');
-    console.log('Hero buttons:', heroButtons);
     let buttonsVisible = false;
 
     function toggleButtons(show) {
-        console.log('Toggling buttons:', show);
         heroButtons.forEach((button, index) => {
             setTimeout(() => {
                 button.classList.toggle('visible', show);
-                console.log(`Button ${index} visibility:`, button.classList.contains('visible'));
             }, index * 100);
         });
         buttonsVisible = show;
     }
 
     function handleScroll() {
-        console.log('Handling scroll');
         const scrollPosition = window.scrollY;
         const heroSection = document.getElementById('hero');
         const heroHeight = heroSection.offsetHeight;
         const scrollThreshold = heroHeight / 30;
 
-        console.log('Scroll position:', scrollPosition);
-        console.log('Scroll threshold:', scrollThreshold);
-
         if (scrollPosition > scrollThreshold && !buttonsVisible) {
-            console.log('Showing buttons');
             toggleButtons(true);
         } else if (scrollPosition <= scrollThreshold && buttonsVisible) {
-            console.log('Hiding buttons');
             toggleButtons(false);
         }
     }
 
     window.addEventListener('scroll', handleScroll);
-    console.log('Scroll event listener added');
 
     function handlePageTransitions() {
         const sections = ['about', 'projects', 'downloads', 'it-services', 'contact'];
@@ -45,13 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const backButton = document.getElementById(section).querySelector('.back-button');
 
             button.addEventListener('click', () => {
-                console.log(`${section} button clicked`);
                 document.body.style.overflow = 'hidden';
                 showSection(section);
             });
 
             backButton.addEventListener('click', () => {
-                console.log(`${section} back button clicked`);
                 document.body.style.overflow = 'auto';
                 showSection('home');
             });
@@ -207,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         }
-        console.log('New state:', isMusicPlaying);
     }
 
     musicToggle.addEventListener('click', toggleMusic);
@@ -231,7 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ensure the audio is ready before allowing interaction
     backgroundMusic.addEventListener('canplaythrough', () => {
-        console.log('Audio file loaded and ready to play');
         musicToggle.disabled = false;
     }, { once: true });
 
