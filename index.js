@@ -32,10 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
         
         sections.forEach(section => {
             const button = document.querySelector(`.hero-button[data-type="${section}"]`);
-            const backButton = document.getElementById(section).querySelector('.back-button');
+            const sectionElement = document.getElementById(section);
             
-            if (!backButton) {
-                console.warn(`No back button found for section: ${section}`);
+            if (!sectionElement) {
+                console.warn(`No section found with id: ${section}`);
+                return;
+            }
+
+            const backButton = sectionElement.querySelector('.back-button');
+            
+            if (!button) {
+                console.warn(`No hero button found for section: ${section}`);
+                return;
             }
 
             button.addEventListener('click', () => {
@@ -48,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.body.style.overflow = 'auto';
                     showSection('home');
                 });
+            } else {
+                console.warn(`No back button found for section: ${section}`);
             }
         });
     }
