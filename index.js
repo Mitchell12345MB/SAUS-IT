@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function animateDots() {
         const dots = document.querySelectorAll('.dot');
         const mouse = { x: Infinity, y: Infinity };
-        const repelDistance = 100;
+        const repelDistance = 50; // Adjusted repel distance
         const repelStrength = 0.1;
 
         dots.forEach(dot => {
