@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const backgroundMusic = document.getElementById('background-music');
-    const musicToggle = document.createElement('button');
+    const musicToggle = document.getElementById('music-toggle');
     musicToggle.id = 'music-toggle';
     musicToggle.innerHTML = '🎵';
     musicToggle.setAttribute('aria-label', 'Toggle background music');
