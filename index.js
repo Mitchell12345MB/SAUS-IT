@@ -208,6 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }).catch(error => {
                     console.error('Failed to play music:', error);
                 });
+            } else {
+                console.error('Play promise is undefined');
             }
         }
     }
