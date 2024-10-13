@@ -207,8 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         isMusicPlaying = !isMusicPlaying;
     }
-
     musicToggle.addEventListener('click', toggleMusic);
+
 
     const floatingDotsContainer = document.getElementById('floating-dots');
     const numberOfDots = 50;
