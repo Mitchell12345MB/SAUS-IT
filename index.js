@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const backgroundMusic = document.getElementById('background-music');
     let musicToggle = document.getElementById('music-toggle');
-
+    musicToggle.id = 'music-toggle';
     if (!musicToggle) {
         musicToggle = document.createElement('button');
         musicToggle.id = 'music-toggle';
@@ -192,7 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
         musicToggle.setAttribute('aria-label', 'Toggle background music');
         document.body.appendChild(musicToggle);
     }
-
     let isMusicPlaying = false;
 
     function toggleMusic() {
