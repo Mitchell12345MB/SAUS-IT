@@ -33,16 +33,22 @@ document.addEventListener('DOMContentLoaded', () => {
         sections.forEach(section => {
             const button = document.querySelector(`.hero-button[data-type="${section}"]`);
             const backButton = document.getElementById(section).querySelector('.back-button');
+            
+            if (!backButton) {
+                console.warn(`No back button found for section: ${section}`);
+            }
 
             button.addEventListener('click', () => {
                 document.body.style.overflow = 'hidden';
                 showSection(section);
             });
 
-            backButton.addEventListener('click', () => {
-                document.body.style.overflow = 'auto';
-                showSection('home');
-            });
+            if (backButton) {
+                backButton.addEventListener('click', () => {
+                    document.body.style.overflow = 'auto';
+                    showSection('home');
+                });
+            }
         });
     }
 
