@@ -191,14 +191,38 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isMusicPlaying) {
             backgroundMusic.pause();
             musicToggle.innerHTML = '🎵';
+            isMusicPlaying = false;
         } else {
-            backgroundMusic.play();
-            musicToggle.innerHTML = '🔇';
+            const playPromise = backgroundMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    musicToggle.innerHTML = '🔇';
+                    isMusicPlaying = true;
+                }).catch(error => {
+                    console.error('Error playing music:', error);
+                    // If autoplay is prevented, we need to show the play button
+                    musicToggle.innerHTML = '🎵';
+                    isMusicPlaying = false;
+                });
+            }
         }
-        isMusicPlaying = !isMusicPlaying;
     }
 
     musicToggle.addEventListener('click', toggleMusic);
+
+    // Add this line to ensure autoplay is disabled
+    backgroundMusic.autoplay = false;
+
+    // Add these lines after the toggleMusic function
+    backgroundMusic.addEventListener('play', () => {
+        musicToggle.innerHTML = '🔇';
+        isMusicPlaying = true;
+    });
+
+    backgroundMusic.addEventListener('pause', () => {
+        musicToggle.innerHTML = '🎵';
+        isMusicPlaying = false;
+    });
 
     const floatingDotsContainer = document.getElementById('floating-dots');
     const numberOfDots = 50;
