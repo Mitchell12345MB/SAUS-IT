@@ -231,11 +231,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ensure the audio is ready before allowing interaction
     backgroundMusic.addEventListener('canplaythrough', () => {
+        console.log('Audio file loaded and ready to play');
         musicToggle.disabled = false;
     }, { once: true });
 
     // Initially disable the button until the audio is ready
     musicToggle.disabled = true;
+
+    // Add an error event listener to catch and log any loading errors
+    backgroundMusic.addEventListener('error', (e) => {
+        console.error('Error loading audio file:', e);
+    });
 
     const floatingDotsContainer = document.getElementById('floating-dots');
     const numberOfDots = 50;
@@ -370,8 +376,4 @@ document.addEventListener('DOMContentLoaded', () => {
             mainNav.classList.remove('show');
         }
     });
-
-    if (backgroundMusic.readyState === 0) {
-        console.error('Audio file not loaded. Check the file path.');
-    }
 });
