@@ -23,7 +23,7 @@
     --header-text: #f4f4f4;
     --highlight-color: rgba(255, 255, 255, 0.1);
     --section-text: #f4f4f4;
-    --dot-color: rgba(255, 255, 255, 0.2);
+    --dot-color: rgb(255, 255, 255);
 }
 
 * {

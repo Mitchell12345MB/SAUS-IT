@@ -181,19 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showSection('home');
         });
     });
-
-    const backgroundMusic = document.getElementById('background-music');
-    let musicToggle = document.getElementById('music-toggle');
-    musicToggle.id = 'music-toggle';
-    if (!musicToggle) {
-        musicToggle = document.createElement('button');
-        musicToggle.id = 'music-toggle';
-        musicToggle.innerHTML = '🎵';
-        musicToggle.setAttribute('aria-label', 'Toggle background music');
-        document.body.appendChild(musicToggle);
-    }
-    let isMusicPlaying = false;
-
+    
     function toggleMusic() {
         console.log('Music toggle clicked');
         console.log('Is music playing:', isMusicPlaying);
@@ -353,3 +341,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
