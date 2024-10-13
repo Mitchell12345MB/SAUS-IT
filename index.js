@@ -196,8 +196,14 @@ document.addEventListener('DOMContentLoaded', () => {
             backgroundMusic.pause();
             musicToggle.innerHTML = '🎵';
         } else {
-            backgroundMusic.play();
-            musicToggle.innerHTML = '🔇';
+            const playPromise = backgroundMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    musicToggle.innerHTML = '🔇';
+                }).catch(error => {
+                    console.error('Failed to play music:', error);
+                });
+            }
         }
         isMusicPlaying = !isMusicPlaying;
     }
