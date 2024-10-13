@@ -183,7 +183,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const backgroundMusic = document.getElementById('background-music');
-    const musicToggle = document.getElementById('music-toggle');
+    let musicToggle = document.getElementById('music-toggle');
+
+    if (!musicToggle) {
+        musicToggle = document.createElement('button');
+        musicToggle.id = 'music-toggle';
+        musicToggle.innerHTML = '🎵';
+        musicToggle.setAttribute('aria-label', 'Toggle background music');
+        document.body.appendChild(musicToggle);
+    }
+
     musicToggle.id = 'music-toggle';
     musicToggle.innerHTML = '🎵';
     musicToggle.setAttribute('aria-label', 'Toggle background music');
