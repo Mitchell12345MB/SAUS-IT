@@ -1,64 +1,60 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM Content Loaded');
     const heroButtons = document.querySelectorAll('.hero-button');
+    console.log('Hero buttons:', heroButtons);
     let buttonsVisible = false;
 
     function toggleButtons(show) {
+        console.log('Toggling buttons:', show);
         heroButtons.forEach((button, index) => {
             setTimeout(() => {
                 button.classList.toggle('visible', show);
+                console.log(`Button ${index} visibility:`, button.classList.contains('visible'));
             }, index * 100);
         });
         buttonsVisible = show;
     }
 
     function handleScroll() {
+        console.log('Handling scroll');
         const scrollPosition = window.scrollY;
         const heroSection = document.getElementById('hero');
         const heroHeight = heroSection.offsetHeight;
         const scrollThreshold = heroHeight / 30;
 
+        console.log('Scroll position:', scrollPosition);
+        console.log('Scroll threshold:', scrollThreshold);
+
         if (scrollPosition > scrollThreshold && !buttonsVisible) {
+            console.log('Showing buttons');
             toggleButtons(true);
         } else if (scrollPosition <= scrollThreshold && buttonsVisible) {
+            console.log('Hiding buttons');
             toggleButtons(false);
         }
     }
 
     window.addEventListener('scroll', handleScroll);
+    console.log('Scroll event listener added');
 
     function handlePageTransitions() {
         const sections = ['about', 'projects', 'downloads', 'it-services', 'contact'];
         
         sections.forEach(section => {
             const button = document.querySelector(`.hero-button[data-type="${section}"]`);
-            const sectionElement = document.getElementById(section);
-            
-            if (!sectionElement) {
-                console.warn(`No section found with id: ${section}`);
-                return;
-            }
-
-            const backButton = sectionElement.querySelector('.back-button');
-            
-            if (!button) {
-                console.warn(`No hero button found for section: ${section}`);
-                return;
-            }
+            const backButton = document.getElementById(section).querySelector('.back-button');
 
             button.addEventListener('click', () => {
+                console.log(`${section} button clicked`);
                 document.body.style.overflow = 'hidden';
                 showSection(section);
             });
 
-            if (backButton) {
-                backButton.addEventListener('click', () => {
-                    document.body.style.overflow = 'auto';
-                    showSection('home');
-                });
-            } else {
-                console.warn(`No back button found for section: ${section}`);
-            }
+            backButton.addEventListener('click', () => {
+                console.log(`${section} back button clicked`);
+                document.body.style.overflow = 'auto';
+                showSection('home');
+            });
         });
     }
 
@@ -181,28 +177,25 @@ document.addEventListener('DOMContentLoaded', () => {
             showSection('home');
         });
     });
-    
+
+    const backgroundMusic = document.getElementById('background-music');
+    const musicToggle = document.createElement('button');
+    musicToggle.id = 'music-toggle';
+    musicToggle.innerHTML = '🎵';
+    musicToggle.setAttribute('aria-label', 'Toggle background music');
+    document.body.appendChild(musicToggle);
+
+    let isMusicPlaying = false;
+
     function toggleMusic() {
-        console.log('Music toggle clicked');
-        console.log('Is music playing:', isMusicPlaying);
         if (isMusicPlaying) {
             backgroundMusic.pause();
             musicToggle.innerHTML = '🎵';
-            isMusicPlaying = false;
         } else {
-            const playPromise = backgroundMusic.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    musicToggle.innerHTML = '🔇';
-                    isMusicPlaying = true;
-                    console.log('Music started playing');
-                }).catch(error => {
-                    console.error('Failed to play music:', error);
-                });
-            } else {
-                console.error('Play promise is undefined');
-            }
+            backgroundMusic.play();
+            musicToggle.innerHTML = '🔇';
         }
+        isMusicPlaying = !isMusicPlaying;
     }
 
     musicToggle.addEventListener('click', toggleMusic);
@@ -341,4 +334,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
