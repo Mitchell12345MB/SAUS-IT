@@ -191,17 +191,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isMusicPlaying) {
             backgroundMusic.pause();
             musicToggle.innerHTML = '🎵';
+            isMusicPlaying = false;
         } else {
             const playPromise = backgroundMusic.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     musicToggle.innerHTML = '🔇';
+                    isMusicPlaying = true;
                 }).catch(error => {
                     console.error('Error playing music:', error);
+                    // If autoplay is prevented, we need to show the play button
+                    musicToggle.innerHTML = '🎵';
+                    isMusicPlaying = false;
                 });
             }
         }
-        isMusicPlaying = !isMusicPlaying;
     }
 
     musicToggle.addEventListener('click', toggleMusic);
@@ -341,5 +345,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!e.target.closest('.main-nav') && !e.target.closest('.menu-toggle')) {
             mainNav.classList.remove('show');
         }
+    });
+
+    // Add these lines after the toggleMusic function
+    backgroundMusic.addEventListener('play', () => {
+        musicToggle.innerHTML = '🔇';
+        isMusicPlaying = true;
+    });
+
+    backgroundMusic.addEventListener('pause', () => {
+        musicToggle.innerHTML = '🎵';
+        isMusicPlaying = false;
     });
 });
