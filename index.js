@@ -188,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isMusicPlaying = false;
 
     function toggleMusic() {
+        console.log('Toggle music clicked. Current state:', isMusicPlaying);
         if (isMusicPlaying) {
             backgroundMusic.pause();
             musicToggle.innerHTML = '🎵';
@@ -196,16 +197,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const playPromise = backgroundMusic.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
+                    console.log('Music started playing');
                     musicToggle.innerHTML = '🔇';
                     isMusicPlaying = true;
                 }).catch(error => {
                     console.error('Error playing music:', error);
-                    // If autoplay is prevented, we need to show the play button
                     musicToggle.innerHTML = '🎵';
                     isMusicPlaying = false;
                 });
             }
         }
+        console.log('New state:', isMusicPlaying);
     }
 
     musicToggle.addEventListener('click', toggleMusic);
@@ -368,4 +370,8 @@ document.addEventListener('DOMContentLoaded', () => {
             mainNav.classList.remove('show');
         }
     });
+
+    if (backgroundMusic.readyState === 0) {
+        console.error('Audio file not loaded. Check the file path.');
+    }
 });
