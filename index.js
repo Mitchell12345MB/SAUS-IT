@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', handleScroll);
 
     function handlePageTransitions() {
-        const sections = ['about', 'events', 'contact'];
+        const sections = ['about', 'projects', 'downloads', 'it-services', 'contact'];
         
         sections.forEach(section => {
             const button = document.querySelector(`.hero-button[data-type="${section}"]`);
