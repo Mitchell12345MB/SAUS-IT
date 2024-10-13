@@ -1,1 +1,104 @@
-<h1>Hello World</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Copper Computer Club</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-container">
+        <div class="background-image"></div>
+    </div>
+    <div id="floating-dots"></div>
+    <header>
+        <nav class="main-nav">
+            <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <button id="mode-toggle" aria-label="Toggle dark mode">
+            <span class="mode-toggle__icon">🌓</span>
+        </button>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h1>Welcome to The Copper Computer Club</h1>
+            <p>Experience the night like never before</p>
+            <div class="hero-buttons">
+                <button class="hero-button" data-type="about">About</button>
+                <button class="hero-button" data-type="events">Events</button>
+                <button class="hero-button" data-type="contact">Contact</button>
+            </div>
+        </section>
+        
+            
+        
+        <section id="about" class="page-section">
+            <div class="section-content">
+                <h2>About The Copper Computer Club</h2>
+                <p>The Copper Computer Club is a vibrant community of technology enthusiasts, programmers, and innovators. Founded in 2024, our club aims to foster learning, collaboration, and creativity in the world of computing.</p>
+                <p>We offer a range of activities including workshops, hackathons, lan parties, and guest speaker events to help our members grow their skills and network with like-minded individuals.</p>
+                <button class="back-button" data-type="home">Back to Home</button>
+            </div>
+        </section>
+        <section id="events" class="page-section">
+            <div class="section-content">
+                <h2>Upcoming Events</h2>
+                <ul>
+                    <li>
+                        <h3>Hackathon 2024</h3>
+                        <p>Date: July 15-17, 2024</p>
+                        <p>Join us for our annual hackathon and build amazing projects!</p>
+                    </li>
+                    <li>
+                        <h3>Halo 2 Lan Party</h3>
+                        <p>Date: Every Tuesday, starting August 6, 2024</p>
+                        <p>Play like the good'ol days.</p>
+                    </li>
+                    <li>
+                        <h3>Console Modding Workshop</h3>
+                        <p>Date: Every Thursday, starting August 1, 2024</p>
+                        <p>Learn how to mod your Xbox, Playstation, or Nintendo console to run custom firmware.</p>
+                    </li>
+                </ul>
+                <button class="back-button" data-type="home">Back to Home</button>
+            </div>
+        </section>
+        <section id="contact" class="page-section">
+            <div class="section-content">
+                <h2>Contact Us</h2>
+                <form>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required autocomplete="name">
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required autocomplete="email">
+                    
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                    
+                    <button type="submit">Send</button>
+                </form>
+                <button class="back-button" data-type="home">Back to Home</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 The Copper Computer Club. All rights reserved.</p>
+    </footer>
+
+    <audio id="background-music" loop>
+        <source src="Skyrim - Music & Ambience - Rainy Night.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script src="index.js"></script>
+</body>
+</html>
