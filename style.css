@@ -504,7 +504,7 @@ button[type="submit"]:hover {
 
 #music-toggle {
     position: fixed;
-    bottom: 1rem;
+    bottom: 0.5rem;
     right: 1rem;
     background: var(--button-bg);
     color: var(--button-text);
