@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM Content Loaded');
     const heroButtons = document.querySelectorAll('.hero-button');
-    console.log('Hero buttons:', heroButtons);
     let buttonsVisible = false;
 
     function toggleButtons(show) {
