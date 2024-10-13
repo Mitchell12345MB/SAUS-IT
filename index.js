@@ -193,11 +193,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(musicToggle);
     }
 
-    musicToggle.id = 'music-toggle';
-    musicToggle.innerHTML = '🎵';
-    musicToggle.setAttribute('aria-label', 'Toggle background music');
-    document.body.appendChild(musicToggle);
-
     let isMusicPlaying = false;
 
     function toggleMusic() {
@@ -222,8 +217,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-    musicToggle.addEventListener('click', toggleMusic);
 
+    musicToggle.addEventListener('click', toggleMusic);
 
     const floatingDotsContainer = document.getElementById('floating-dots');
     const numberOfDots = 50;
@@ -359,4 +354,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
