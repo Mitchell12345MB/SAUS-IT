@@ -182,66 +182,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const musicToggle = document.createElement('button');
     musicToggle.id = 'music-toggle';
     musicToggle.innerHTML = '🎵';
-    musicToggle.setAttribute('aria-label', 'Toggle background music');
     document.body.appendChild(musicToggle);
 
     let isMusicPlaying = false;
 
     function toggleMusic() {
-        console.log('Toggle music clicked. Current state:', isMusicPlaying);
         if (isMusicPlaying) {
             backgroundMusic.pause();
             musicToggle.innerHTML = '🎵';
-            isMusicPlaying = false;
         } else {
-            const playPromise = backgroundMusic.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    console.log('Music started playing');
-                    musicToggle.innerHTML = '🔇';
-                    isMusicPlaying = true;
-                }).catch(error => {
-                    console.error('Error playing music:', error);
-                    musicToggle.innerHTML = '🎵';
-                    isMusicPlaying = false;
-                });
-            }
+            backgroundMusic.play().then(() => {
+                musicToggle.innerHTML = '🔇';
+            }).catch(error => {
+                console.error('Error playing music:', error);
+            });
         }
-        console.log('New state:', isMusicPlaying);
+        isMusicPlaying = !isMusicPlaying;
     }
 
     musicToggle.addEventListener('click', toggleMusic);
 
-    // Add this line to ensure autoplay is disabled
-    backgroundMusic.autoplay = false;
-
-    // Add these lines after the toggleMusic function
-    backgroundMusic.addEventListener('play', () => {
-        musicToggle.innerHTML = '🔇';
-        isMusicPlaying = true;
-    });
-
-    backgroundMusic.addEventListener('pause', () => {
-        musicToggle.innerHTML = '🎵';
-        isMusicPlaying = false;
-    });
-
-    // Preload the audio
-    backgroundMusic.load();
-
-    // Ensure the audio is ready before allowing interaction
     backgroundMusic.addEventListener('canplaythrough', () => {
-        console.log('Audio file loaded and ready to play');
         musicToggle.disabled = false;
     }, { once: true });
 
-    // Initially disable the button until the audio is ready
-    musicToggle.disabled = true;
-
-    // Add an error event listener to catch and log any loading errors
     backgroundMusic.addEventListener('error', (e) => {
         console.error('Error loading audio file:', e);
     });
+
+    musicToggle.disabled = true;
 
     const floatingDotsContainer = document.getElementById('floating-dots');
     const numberOfDots = 50;
