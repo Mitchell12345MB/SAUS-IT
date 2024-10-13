@@ -197,18 +197,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isMusicPlaying) {
             backgroundMusic.pause();
             musicToggle.innerHTML = '🎵';
+            isMusicPlaying = false;
         } else {
             const playPromise = backgroundMusic.play();
             if (playPromise !== undefined) {
                 playPromise.then(() => {
                     musicToggle.innerHTML = '🔇';
+                    isMusicPlaying = true;
                     console.log('Music started playing');
                 }).catch(error => {
                     console.error('Failed to play music:', error);
                 });
             }
         }
-        isMusicPlaying = !isMusicPlaying;
     }
     musicToggle.addEventListener('click', toggleMusic);
 
