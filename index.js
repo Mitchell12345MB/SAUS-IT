@@ -224,6 +224,17 @@ document.addEventListener('DOMContentLoaded', () => {
         isMusicPlaying = false;
     });
 
+    // Preload the audio
+    backgroundMusic.load();
+
+    // Ensure the audio is ready before allowing interaction
+    backgroundMusic.addEventListener('canplaythrough', () => {
+        musicToggle.disabled = false;
+    }, { once: true });
+
+    // Initially disable the button until the audio is ready
+    musicToggle.disabled = true;
+
     const floatingDotsContainer = document.getElementById('floating-dots');
     const numberOfDots = 50;
 
