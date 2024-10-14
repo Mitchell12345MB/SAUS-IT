@@ -362,4 +362,83 @@ document.addEventListener('DOMContentLoaded', () => {
             mainNav.classList.remove('show');
         }
     });
+
+    const projectsSection = document.getElementById('projects');
+    const projectsList = projectsSection.querySelector('ul');
+
+    async function fetchGitHubProjects() {
+        try {
+            const response = await fetch('https://api.github.com/users/Mitchell12345MB/repos');
+            const repos = await response.json();
+
+            repos.forEach(repo => {
+                const projectItem = document.createElement('li');
+                projectItem.classList.add('project-item');
+
+                projectItem.innerHTML = `
+                    <h3>${repo.name}</h3>
+                    <p>${repo.description || 'No description available'}</p>
+                    <a href="${repo.html_url}" target="_blank">View on GitHub</a>
+                `;
+
+                projectsList.appendChild(projectItem);
+            });
+        } catch (error) {
+            console.error('Error fetching GitHub projects:', error);
+        }
+    }
+
+    fetchGitHubProjects();
+
+    // Function to fetch releases from GitHub
+    async function fetchLatestReleases() {
+        const repoOwner = 'Mitchell12345MB';
+        const repoNames = 'Super-Saiyan-Transformations, SSJProject, XBox360App'.split(',').map(name => name.trim());
+
+        const allReleases = [];
+
+        for (const repoName of repoNames) {
+            const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/releases`;
+
+            try {
+                const response = await fetch(apiUrl);
+                const releases = await response.json();
+
+                if (Array.isArray(releases) && releases.length > 0) {
+                    const latestRelease = releases.reduce((latest, release) => {
+                        return new Date(release.published_at) > new Date(latest.published_at) ? release : latest;
+                    }, releases[0]);
+
+                    allReleases.push(latestRelease);
+                } else {
+                    console.warn(`No releases found for ${repoName}`);
+                }
+            } catch (error) {
+                console.error(`Error fetching releases for ${repoName}:`, error);
+            }
+        }
+
+        displayReleases(allReleases.filter(release => release !== undefined));
+    }
+
+    // Function to display releases in the downloads section
+    function displayReleases(releases) {
+        const downloadsList = document.querySelector('.downloads-list');
+        downloadsList.innerHTML = ''; // Clear existing content
+
+        releases.forEach(release => {
+            const releaseItem = document.createElement('li');
+            releaseItem.classList.add('download-item');
+            releaseItem.innerHTML = `
+                <h3>${release.name}</h3>
+                <p>${release.published_at}</p>
+                <p>${release.body}</p>
+                <a href="${release.html_url}" target="_blank">View Release</a>
+            `;
+            downloadsList.appendChild(releaseItem);
+        });
+    }
+
+    // Call the function to fetch and display the latest releases
+    fetchLatestReleases();
 });
