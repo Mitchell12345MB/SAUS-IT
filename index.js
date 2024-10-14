@@ -393,7 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to fetch releases from GitHub
     async function fetchLatestReleases() {
         const repoOwner = 'Mitchell12345MB';
-        const repoNames = 'Super-Saiyan-Transformations, SSJProject, XBox360App'.split(',').map(name => name.trim());
+        const repoNames = 'Super-Saiyan-Transformations, SSJProject, XBox360App, Windows-Modifications'.split(',').map(name => name.trim());
 
         const allReleases = [];
 
