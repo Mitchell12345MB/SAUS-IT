@@ -84,6 +84,10 @@ body {
 }
 
 header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
     color: var(--header-text);
     position: fixed;
     width: 100%;
@@ -150,7 +154,7 @@ footer {
 
 #mode-toggle {
     position: absolute;
-    top: 1rem;
+    top: 0.5rem;
     right: 1rem;
     background: none;
     border: none;
@@ -297,10 +301,9 @@ main {
 }
 
 .main-nav {
+    flex-grow: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 60px;
 }
 
 .main-nav ul {
@@ -308,7 +311,6 @@ main {
     justify-content: center;
     list-style: none;
     align-items: center;
-    height: 100%;
     margin: 0;
     padding: 0;
 }
@@ -772,4 +774,20 @@ button[type="submit"] {
 
 .download-item a:hover {
     background-color: var(--highlight-color);
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.social-icons a {
+    color: var(--header-text);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--highlight-color);
 }
