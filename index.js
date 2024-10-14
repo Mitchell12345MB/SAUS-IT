@@ -102,6 +102,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const pageSections = document.querySelectorAll('.page-section');
 
         if (sectionId === 'home') {
+            // Reset overflow when returning to home
+            document.body.style.overflow = 'auto';
+
             // Fade out all sections
             pageSections.forEach(section => {
                 section.style.opacity = '0';
@@ -441,4 +444,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Call the function to fetch and display the latest releases
     fetchLatestReleases();
+
+    const downloadButtons = document.querySelectorAll('.download-button');
+    const githubDownloads = document.querySelector('.github-downloads');
+    const websiteDownloads = document.querySelector('.website-downloads');
+
+    downloadButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const type = button.getAttribute('data-type');
+            if (type === 'github') {
+                githubDownloads.style.display = 'block';
+                websiteDownloads.style.display = 'none';
+            } else if (type === 'website') {
+                websiteDownloads.style.display = 'block';
+                githubDownloads.style.display = 'none';
+            }
+        });
+    });
 });

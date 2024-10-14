@@ -78,7 +78,24 @@
         <section id="downloads" class="page-section">
             <div class="section-content">
                 <h2>Downloads</h2>
-                <ul class="downloads-list"></ul>
+                <div class="download-buttons">
+                    <button class="download-button" data-type="github">GitHub Downloads</button>
+                    <button class="download-button" data-type="website">Website Downloads</button>
+                </div>
+                <div class="downloads-list github-downloads" style="display: none;">
+                    <ul></ul>
+                </div>
+                <div class="downloads-list website-downloads" style="display: none;">
+                    <ul>
+                        <!-- Add your website-specific downloads here -->
+                        <li class="download-item">
+                            <h3>Website Download 1</h3>
+                            <p>Description of website download 1.</p>
+                            <a href="#" target="_blank">Download</a>
+                        </li>
+                        <!-- Add more website downloads as needed -->
+                    </ul>
+                </div>
                 <button class="back-button" data-type="home">Back to Home</button>
             </div>
         </section>
