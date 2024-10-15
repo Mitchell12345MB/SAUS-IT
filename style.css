@@ -1,19 +1,19 @@
 :root {
     --text-color: #333;
-    --section-bg: rgba(255, 255, 255, 0.8); /* Adjust the transparency */
+    --section-bg: rgba(255, 255, 255, 0.8);
     --header-footer-bg: rgba(255, 255, 255, 0.7);
     --header-footer-text: #333;
     --button-bg: rgba(255, 255, 255, 0.7);
     --button-text: #333;
     --header-text: #333;
     --highlight-color: rgba(0, 0, 0, 0.1);
+    --dot-color: rgba(0, 0, 0);
     transition: all 0.3s ease;
-    --dot-color: rgba(255, 255, 255, 0.2);
 }
 
 .dark-mode {
     --text-color: #f4f4f4;
-    --section-bg: #2a2a2a;
+    --section-bg: rgb(0, 0, 0, 0.8);
     --header-footer-bg: rgba(0, 0, 0, 0.7);
     --header-footer-text: #f4f4f4;
     --button-bg: rgba(0, 0, 0, 0.7);
@@ -21,7 +21,7 @@
     --header-text: #f4f4f4;
     --highlight-color: rgba(255, 255, 255, 0.1);
     --section-text: #f4f4f4;
-    --dot-color: rgb(255, 255, 255);
+    --dot-color: rgba(255, 255, 255)
 }
 
 * {
