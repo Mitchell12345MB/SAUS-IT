@@ -6,7 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function toggleButtons(show) {
         heroButtons.forEach((button, index) => {
             setTimeout(() => {
-                button.classList.toggle('visible', show);
+                if (show) {
+                    button.classList.add('visible');
+                    button.style.pointerEvents = 'auto';
+                } else {
+                    button.classList.remove('visible');
+                    button.style.pointerEvents = 'none';
+                }
             }, index * 100);
         });
         buttonsVisible = show;
@@ -100,25 +106,30 @@ document.addEventListener('DOMContentLoaded', () => {
     function showSection(sectionId) {
         const heroSection = document.getElementById('hero');
         const pageSections = document.querySelectorAll('.page-section');
+        const heroButtons = document.querySelectorAll('.hero-button');
+        const downloadsSection = document.getElementById('downloads');
 
         if (sectionId === 'home') {
-            // Reset overflow when returning to home
             document.body.style.overflow = 'auto';
 
-            // Fade out all sections
             pageSections.forEach(section => {
-                section.style.opacity = '0';
-                section.style.visibility = 'hidden';
-                const content = section.querySelector('.section-content');
-                content.style.opacity = '0';
-                content.style.transform = 'translateY(50px) scale(0.95)';
+                section.classList.remove('visible');
+                section.style.zIndex = '-1';
             });
 
-            // Show hero section after a short delay
-            setTimeout(() => {
-                heroSection.style.display = 'flex';
-                heroSection.style.opacity = '1';
-            }, 300);
+            heroSection.style.display = 'flex';
+            heroSection.style.opacity = '1';
+
+            heroButtons.forEach(button => {
+                button.classList.add('visible');
+                button.style.pointerEvents = 'auto';
+            });
+
+            // Reset scroll position
+            window.scrollTo(0, 0);
+
+            // Trigger the handleScroll function to update button visibility
+            handleScroll();
         } else {
             const targetSection = document.getElementById(sectionId);
             if (!targetSection) {
@@ -126,31 +137,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Hide hero section, show only the target section
-            heroSection.style.opacity = '0';
-            setTimeout(() => {
-                heroSection.style.display = 'none';
-                pageSections.forEach(section => {
-                    if (section.id === sectionId) {
-                        section.style.visibility = 'visible';
-                        section.style.opacity = '1';
-                        // Show content with a slight delay
-                        setTimeout(() => {
-                            const content = section.querySelector('.section-content');
-                            content.style.opacity = '1';
-                            content.style.transform = 'translateY(0) scale(1)';
-                        }, 50);
-                    } else {
-                        section.style.visibility = 'hidden';
-                        section.style.opacity = '0';
-                        // Reset content styles for hidden sections
-                        const content = section.querySelector('.section-content');
-                        content.style.opacity = '0';
-                        content.style.transform = 'translateY(50px) scale(0.95)';
-                    }
-                });
-            }, 300);
+            heroSection.style.display = 'none';
+            pageSections.forEach(section => {
+                section.classList.remove('visible');
+                section.style.zIndex = '-1';
+            });
+            targetSection.classList.add('visible');
+            targetSection.style.zIndex = '2000';
+
+            // Show the downloads section if it's the target
+            if (sectionId === 'downloads' && downloadsSection) {
+                downloadsSection.style.display = 'block';
+            }
         }
+
+        // Apply blur effect to background when showing a section
+        const backgroundImage = document.querySelector('.background-image');
+        if (sectionId !== 'home') {
+            backgroundImage.classList.add('background-blur');
+        } else {
+            backgroundImage.classList.remove('background-blur');
+        }
+    }
+
+    function handleHeroButtonClick() {
+        document.body.style.overflow = 'hidden';
+        showSection(this.getAttribute('data-type'));
     }
 
     navLinks.forEach(link => {
@@ -393,8 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetchGitHubProjects();
 
-    // Function to fetch releases from GitHub
-    async function fetchLatestReleases() {
+    async function fetchGitHubReleases() {
         const repoOwner = 'Mitchell12345MB';
         const repoNames = 'Super-Saiyan-Transformations, SSJProject, XBox360App, Windows-Modifications'.split(',').map(name => name.trim());
 
@@ -424,6 +435,20 @@ document.addEventListener('DOMContentLoaded', () => {
         displayReleases(allReleases.filter(release => release !== undefined));
     }
 
+    function showDownloads(type) {
+        const githubDownloads = document.querySelector('.github-downloads');
+        const websiteDownloads = document.querySelector('.website-downloads');
+
+        if (type === 'github') {
+            githubDownloads.classList.add('active');
+            websiteDownloads.classList.remove('active');
+            fetchGitHubReleases();
+        } else {
+            githubDownloads.classList.remove('active');
+            websiteDownloads.classList.add('active');
+        }
+    }
+
     // Function to display releases in the downloads section
     function displayReleases(releases) {
         const downloadsList = document.querySelector('.downloads-list');
@@ -442,23 +467,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Call the function to fetch and display the latest releases
-    fetchLatestReleases();
-
+    // Call the function to fetch and display the latest releases when needed
+    // For example, you can call it when the downloads section is shown
     const downloadButtons = document.querySelectorAll('.download-button');
-    const githubDownloads = document.querySelector('.github-downloads');
-    const websiteDownloads = document.querySelector('.website-downloads');
-
     downloadButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const type = button.getAttribute('data-type');
-            if (type === 'github') {
-                githubDownloads.style.display = 'block';
-                websiteDownloads.style.display = 'none';
-            } else if (type === 'website') {
-                websiteDownloads.style.display = 'block';
-                githubDownloads.style.display = 'none';
-            }
+            showDownloads(button.getAttribute('data-type'));
         });
     });
 });
