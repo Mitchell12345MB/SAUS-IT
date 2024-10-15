@@ -55,7 +55,7 @@ body {
     left: -50px;
     width: calc(100% + 100px);
     height: calc(100% + 100px);
-    background-image: url('/resources/images/background-header-small.webp');
+    background-image: url('background-header-small.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -65,13 +65,13 @@ body {
 
 @media (min-width: 800px) {
     .background-image {
-        background-image: url('/resources/images/background-header-medium.webp');
+        background-image: url('background-header-medium.webp');
     }
 }
 
 @media (min-width: 1200px) {
     .background-image {
-        background-image: url('/resources/images/background-header-large.webp');
+        background-image: url('background-header-large.webp');
     }
 }
 
