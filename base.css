@@ -1,0 +1,41 @@
+:root {
+    --text-color: #333;
+    --section-bg: rgba(255, 255, 255, 0.8);
+    --header-footer-bg: rgba(255, 255, 255, 0.7);
+    --header-footer-text: #333;
+    --button-bg: rgba(255, 255, 255, 0.7);
+    --button-text: #333;
+    --header-text: #333;
+    --highlight-color: rgba(0, 0, 0, 0.1);
+    --dot-color: rgba(0, 0, 0);
+    transition: all 0.3s ease;
+}
+
+.dark-mode {
+    --text-color: #f4f4f4;
+    --section-bg: rgb(0, 0, 0, 0.8);
+    --header-footer-bg: rgba(0, 0, 0, 0.7);
+    --header-footer-text: #f4f4f4;
+    --button-bg: rgba(0, 0, 0, 0.7);
+    --button-text: #f4f4f4;
+    --header-text: #f4f4f4;
+    --highlight-color: rgba(255, 255, 255, 0.1);
+    --section-text: #f4f4f4;
+    --dot-color: rgba(255, 255, 255)
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+}
+

@@ -1,19 +1,34 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>The SauS-IT Website</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Add Font Awesome CDN -->
+
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="components.css">
+    <link rel="stylesheet" href="utilities.css">
+    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="responsive.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+
     <link rel="manifest" href="site.webmanifest">
+
+    
 </head>
 <body>
     <div class="background-container">
@@ -39,7 +54,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#downloads">Downloads</a></li>
-                <li><a href="#it-services">IT Services</a></li>
+                <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -56,7 +71,7 @@
                 <button class="hero-button" data-type="about">About</button>
                 <button class="hero-button" data-type="projects">Projects</button>
                 <button class="hero-button" data-type="downloads">Downloads</button>
-                <button class="hero-button" data-type="it-services">IT Services</button>
+                <button class="hero-button" data-type="services">Services</button>
                 <button class="hero-button" data-type="contact">Contact</button>
             </div>
         </section>
@@ -111,10 +126,33 @@
             </div>
         </section>
 
-        <section id="it-services" class="page-section">
+        <section id="services" class="page-section">
             <div class="section-content">
-                <h2>IT Services</h2>
-                <p>The SauS-IT offers a range of IT services including computer repair, networking, and software development.</p>
+                <h2>Services</h2>
+                <div class="service-buttons">
+                    <button class="service-button" data-type="it">IT Services</button>
+                    <button class="service-button" data-type="website">Website Services</button>
+                </div>
+                <div class="services-list it-services">
+                    <h3>IT Services</h3>
+                    <p>We offer a range of IT services including:</p>
+                    <ul>
+                        <li>Computer repair and maintenance</li>
+                        <li>Network setup and troubleshooting</li>
+                        <li>Software development and customization</li>
+                        <li>IT consulting and support</li>
+                    </ul>
+                </div>
+                <div class="services-list website-services">
+                    <h3>Website Services</h3>
+                    <p>Our website services include:</p>
+                    <ul>
+                        <li>Responsive web design</li>
+                        <li>Custom website development</li>
+                        <li>E-commerce solutions</li>
+                        <li>Website maintenance and updates</li>
+                    </ul>
+                </div>
                 <button class="back-button" data-type="home">Back to Home</button>
             </div>
         </section>

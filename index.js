@@ -34,21 +34,27 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', handleScroll);
 
     function handlePageTransitions() {
-        const sections = ['about', 'projects', 'downloads', 'it-services', 'contact'];
+        const sections = ['about', 'projects', 'downloads', 'services', 'contact'];
         
         sections.forEach(section => {
             const button = document.querySelector(`.hero-button[data-type="${section}"]`);
-            const backButton = document.getElementById(section).querySelector('.back-button');
+            const backButton = document.getElementById(section)?.querySelector('.back-button');
 
-            button.addEventListener('click', () => {
-                document.body.style.overflow = 'hidden';
-                showSection(section);
-            });
+            if (button) {
+                button.addEventListener('click', () => {
+                    document.body.style.overflow = 'hidden';
+                    showSection(section);
+                });
+            } else {
+                console.warn(`Button for section "${section}" not found`);
+            }
 
-            backButton.addEventListener('click', () => {
-                document.body.style.overflow = 'auto';
-                showSection('home');
-            });
+            if (backButton) {
+                backButton.addEventListener('click', () => {
+                    document.body.style.overflow = 'auto';
+                    showSection('home');
+                });
+            }
         });
     }
 

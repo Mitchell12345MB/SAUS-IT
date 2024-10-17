@@ -1,0 +1,113 @@
+/* Responsive styles for tablets and below */
+@media (max-width: 768px) {
+    #hero h1 {
+        font-size: 2.5rem;
+    }
+
+    #hero p {
+        font-size: 1.2rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-button {
+        width: 100%;
+        max-width: 200px;
+        margin-bottom: 1rem;
+    }
+
+    .main-nav {
+        height: auto;
+        padding: 1rem 0;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+    }
+
+    .main-nav ul li {
+        margin: 0.5rem 0;
+    }
+
+    .main-nav ul li:not(:last-child)::after {
+        display: none;
+    }
+
+    .section-content {
+        padding: 1rem;
+        max-width: 90%;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .main-nav ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--header-footer-bg);
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+    }
+
+    .main-nav ul.show {
+        display: flex;
+    }
+
+    #mode-toggle {
+        top: 1rem;
+        right: 4rem;
+    }
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 480px) {
+    #hero h1 {
+        font-size: 2rem;
+    }
+
+    #hero p {
+        font-size: 1rem;
+    }
+
+    .section-content {
+        padding: 0.5rem;
+    }
+
+    html {
+        font-size: 12px;
+    }
+}
+
+/* Responsive styles for large screens */
+@media (min-width: 1200px) {
+    .section-content {
+        max-width: 1000px;
+    }
+}
+
+/* Adjust font sizes */
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+}
+
