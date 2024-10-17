@@ -408,21 +408,21 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchGitHubReleases() {
         const repoOwner = 'Mitchell12345MB';
         const repoNames = 'Super-Saiyan-Transformations, SSJProject, XBox360App, Windows-Modifications'.split(',').map(name => name.trim());
-
+    
         const allReleases = [];
-
+    
         for (const repoName of repoNames) {
             const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/releases`;
-
+    
             try {
                 const response = await fetch(apiUrl);
                 const releases = await response.json();
-
+    
                 if (Array.isArray(releases) && releases.length > 0) {
                     const latestRelease = releases.reduce((latest, release) => {
                         return new Date(release.published_at) > new Date(latest.published_at) ? release : latest;
                     }, releases[0]);
-
+    
                     allReleases.push(latestRelease);
                 } else {
                     console.warn(`No releases found for ${repoName}`);
@@ -431,21 +431,44 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error(`Error fetching releases for ${repoName}:`, error);
             }
         }
-
+    
         displayReleases(allReleases.filter(release => release !== undefined));
     }
 
     function showDownloads(type) {
         const githubDownloads = document.querySelector('.github-downloads');
         const websiteDownloads = document.querySelector('.website-downloads');
+        const loadingAnimation = document.querySelector('.loading-animation');
+        const downloadButtons = document.querySelectorAll('.download-button');
+        const downloadsContent = document.querySelector('#downloads .section-content');
+
+        githubDownloads.classList.remove('active');
+        websiteDownloads.classList.remove('active');
+        
+        // Hide download buttons and lists while loading
+        downloadButtons.forEach(button => button.style.display = 'none');
+        githubDownloads.style.display = 'none';
+        websiteDownloads.style.display = 'none';
+        
+        loadingAnimation.style.display = 'block';
+        
+        // Insert loading animation after the download buttons
+        downloadsContent.insertBefore(loadingAnimation, githubDownloads);
 
         if (type === 'github') {
-            githubDownloads.classList.add('active');
-            websiteDownloads.classList.remove('active');
-            fetchGitHubReleases();
+            fetchGitHubReleases().then(() => {
+                loadingAnimation.style.display = 'none';
+                githubDownloads.classList.add('active');
+                githubDownloads.style.display = 'block';
+                downloadButtons.forEach(button => button.style.display = 'inline-block');
+            });
         } else {
-            githubDownloads.classList.remove('active');
-            websiteDownloads.classList.add('active');
+            setTimeout(() => {
+                loadingAnimation.style.display = 'none';
+                websiteDownloads.classList.add('active');
+                websiteDownloads.style.display = 'block';
+                downloadButtons.forEach(button => button.style.display = 'inline-block');
+            }, 500); // Simulating a short delay for website downloads
         }
     }
 
