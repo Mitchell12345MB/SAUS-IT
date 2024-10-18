@@ -83,6 +83,7 @@ h1, h2 {
     flex-grow: 1;
     display: flex;
     justify-content: center;
+    margin: 0px 50px 0px 0px; /* Add this line to center the nav */
 }
 
 .main-nav ul {

@@ -504,4 +504,62 @@ document.addEventListener('DOMContentLoaded', () => {
             showDownloads(button.getAttribute('data-type'));
         });
     });
+
+    function handleServiceDetails() {
+        const serviceButtons = document.querySelectorAll('.website-services .service-button');
+
+        serviceButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const serviceOption = button.parentElement;
+                const serviceDetails = serviceOption.querySelector('.service-details');
+
+                // Toggle the active class to trigger the animation
+                serviceDetails.classList.toggle('active');
+
+                // Optionally collapse other details
+                document.querySelectorAll('.service-details').forEach(details => {
+                    if (details !== serviceDetails) {
+                        details.classList.remove('active');
+                    }
+                });
+            });
+        });
+    }
+
+    handleServiceDetails();
+
+    function handleServiceButtonClick() {
+        const serviceButtons = document.querySelectorAll('.service-buttons .service-button');
+        const serviceLists = document.querySelectorAll('.services-list');
+
+        serviceButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+
+                const type = button.getAttribute('data-type');
+
+                // Toggle active class on buttons
+                serviceButtons.forEach(btn => {
+                    if (btn === button) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+
+                // Show the corresponding service list
+                serviceLists.forEach(list => {
+                    if (list.classList.contains(`${type}-services`)) {
+                        list.classList.add('active');
+                    } else {
+                        list.classList.remove('active');
+                    }
+                });
+            });
+        });
+    }
+
+    // Call the function to initialize the event listeners
+    handleServiceButtonClick();
 });
